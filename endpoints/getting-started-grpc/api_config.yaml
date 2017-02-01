@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 #
-# A Bookstore example API configuration.
+# An example API configuration.
 #
 # Below, replace MY_PROJECT_ID with your Google Cloud Project ID.
 #
@@ -26,7 +27,7 @@ config_version: 3
 #
 # Name of the service configuration.
 #
-name: hellogrpc.endpoints.jeffs-test-deploy-1.cloud.goog
+name: hellogrpc.endpoints.MY_PROJECT_ID.cloud.goog
 
 #
 # API title to appear in the user interface (Google Cloud Console).
@@ -34,12 +35,3 @@ name: hellogrpc.endpoints.jeffs-test-deploy-1.cloud.goog
 title: Hello gRPC API
 apis:
 - name: helloworld.Greeter
-
-# #
-# # API usage restrictions.
-# #
-# usage:
-#   rules:
-#   # ListShelves methods can be called without an API Key.
-#   - selector: endpoints.examples.bookstore.Bookstore.ListShelves
-#     allow_unregistered_calls: true

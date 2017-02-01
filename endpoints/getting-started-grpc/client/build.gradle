@@ -13,4 +13,5 @@ jar {
 
 dependencies {
   compile project(':api')
+  compile 'commons-cli:commons-cli:1.3'
 }

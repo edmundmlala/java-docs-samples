@@ -82,7 +82,7 @@ It is assumed that you have a working gRPC and Java environment.
     docker run --detach --name=esp \
         -p 80:9000 \
         --link=grpc-hello:grpc-hello \
-        b.gcr.io/endpoints/endpoints-runtime:1 \
+        gcr.io/endpoints-release/endpoints-runtime:1 \
         -s ${SERVICE_NAME} \
         -v ${SERVICE_CONFIG_ID} \
         -P 9000 \
@@ -120,7 +120,7 @@ It is assumed that you have a working gRPC and Java environment.
 1. Get IP of load balancer, run until you see an External IP.
 
     ```
-    kubectl get svc esp-echo
+    kubectl get svc grpc-hello
     ```
 
 1. Run the client

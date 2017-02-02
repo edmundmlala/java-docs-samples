@@ -36,7 +36,7 @@ It is assumed that you have a working gRPC and Java environment.
     # The Config ID should be printed out, looks like: 2017-02-01r0, remember this
 
     # set your project to make commands easier
-    GCLOUD_PROJECT=<your project id>
+    GCLOUD_PROJECT=<Your Project ID>
 
     # Print out your Config ID again, in case you missed it
     gcloud service-management configs list --service hellogrpc.endpoints.${GCLOUD_PROJECT}.cloud.goog
@@ -66,7 +66,7 @@ It is assumed that you have a working gRPC and Java environment.
     ```
     GCLOUD_PROJECT=$(curl -s "http://metadata.google.internal/computeMetadata/v1/project/project-id" -H "Metadata-Flavor: Google")
     SERVICE_NAME=hellogrpc.endpoints.${GCLOUD_PROJECT}.cloud.goog
-    SERVICE_CONFIG_ID=<your config id>
+    SERVICE_CONFIG_ID=<Your Config ID>
     ```
 
 1. Pull your credentials to access Container Registry, and run your gRPC server container
@@ -89,7 +89,7 @@ It is assumed that you have a working gRPC and Java environment.
         -a grpc://grpc-hello:50051
     ```
 
-1. Back on your local machine, get the IP of your GCE instance.
+1. Back on your local machine, get the external IP of your GCE instance.
 
     ```
     gcloud compute instances list
@@ -98,17 +98,33 @@ It is assumed that you have a working gRPC and Java environment.
 1. Run the client
 
     ```
-    java -jar client/build/libs/client.jar --host <ip of GCE instance>:80 --api_key <api key from console>
+    java -jar client/build/libs/client.jar --host <IP of GCE Instance>:80 --api_key <API Key from Console>
     ```
 
 ### GKE
 
 1. Create a cluster
-1. Edit GKE yaml, fill in service name / config
+
+    ```
+    gcloud container clusters create my-cluster
+    ```
+
+1. Edit `container-engine.yaml`. Replace `SERVICE_NAME`, `SERVICE_CONFIG_ID`, and `GCLOUD_PROJECT` with your values.
+
 1. Deploy to GKE
-1. Get IP of load balancer
+
+    ```
+    kubectl create -f ./container-engine.yaml
+    ```
+
+1. Get IP of load balancer, run until you see an External IP.
+
+    ```
+    kubectl get svc esp-echo
+    ```
+
 1. Run the client
 
     ```
-    java -jar client/build/libs/client.jar --host <ip of GKE LB>:80 --api_key <api key from console>
+    java -jar client/build/libs/client.jar --host <IP of GKE LoadBalancer>:80 --api_key <API Key from Console>
     ```
